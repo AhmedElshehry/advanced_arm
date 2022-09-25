@@ -243,10 +243,37 @@ void Dio_WritePort(Dio_PortType PortId, Dio_PortLevelType Level)
 * \Return value:   : None
 *******************************************************************************/
 
-//void Dio_FlipChannel(Dio_ChannelType Channels_IDS)
-//{
+void Dio_FlipChannel(Dio_ChannelType Channels_IDS)
+{
+    uint8_t localPort_id=Channels_IDS/8;
+    uint8_t PinNumber=Channels_IDS % 8;
 
-//}
+ switch (localPort_id)
+	   {
+	   case 0:
+	   	 GPIOA->DATA^=(1<<PinNumber);
+	       break;
+	   case 1:
+	   	 GPIOB->DATA^=(1<<PinNumber);
+	       break;
+	   case 2:
+	   	 GPIOC->DATA ^=(1<<PinNumber);
+	       break;
+	   case 3:
+	   	 GPIOD->DATA ^=(1<<PinNumber);
+	       break;
+	   case 4:
+	   	 GPIOE->DATA ^=(1<<PinNumber);
+	       break;
+	   case 5:
+	   	 GPIOF->DATA ^=(1<<PinNumber);
+	       break;
+	   default:
+	       break;
+	   }
+
+
+}
 /**********************************************************************************************************************
  *  END OF FILE: dio_drive.c
  *********************************************************************************************************************/
